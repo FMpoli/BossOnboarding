@@ -1,17 +1,20 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "base33/bossonboarding",
+    "description": "FilamentPHP Plugin for BossBoilerplate – Tenant Registration Module",
     "keywords": [
-        ":vendor_name",
+        "Base33",
         "laravel",
-        ":package_slug"
+        "bossonboarding"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "private": true,
+    "type": "module",
+
+    "homepage": "https://github.com/base33/bossonboarding",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Francesco Mulassano",
+            "email": "info@base33.it",
             "role": "Developer"
         }
     ],
@@ -35,14 +38,12 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src/",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories/"
+            "Base33\\BossOnboarding\\": ["src/", "database/"]
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests/",
-            "Workbench\\App\\": "workbench/app/"
+            "Base33\\BossOnboarding\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -51,7 +52,12 @@
         "analyse": "vendor/bin/phpstan analyse",
         "test": "vendor/bin/pest",
         "test-coverage": "vendor/bin/pest --coverage",
-        "format": "vendor/bin/pint"
+        "format": "vendor/bin/pint",
+        "dev": "node bin/build.js --dev",
+        "build": "node bin/build.js"
+    },
+    "devDependencies": {
+        "esbuild": "^0.17.19"
     },
     "config": {
         "sort-packages": true,
@@ -63,13 +69,14 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "Base33\\BossOnboarding\\BossOnboardingServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "BossOnboarding": "Base33\\BossOnboarding\\Facades\\BossOnboarding"
             }
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "version": "0.0.1"
 }

@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Base33\BossOnboarding\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class BossOnboardingCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'bossonboarding';
 
     public $description = 'My command';
 

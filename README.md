@@ -1,68 +1,170 @@
-# :package_description
+# FilamentPHP Plugin for BossBoilerplate – Tenant Registration Module
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/:vendor_slug/:package_slug/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/:vendor_slug/:package_slug/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
-<!--delete-->
----
-This repo can be used to scaffold a Laravel package. Follow these steps to get started:
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/base33/bossonboarding.svg?style=flat-square)](https://packagist.org/packages/base33/bossonboarding)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/base33/bossonboarding/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/base33/bossonboarding/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/base33/bossonboarding/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/base33/bossonboarding/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/base33/bossonboarding.svg?style=flat-square)](https://packagist.org/packages/base33/bossonboarding)
 
-1. Press the "Use this template" button at the top of this repo to create a new repo with the contents of this skeleton.
-2. Run "php ./configure.php" to run a script that will replace all placeholders throughout all the files.
-3. Have fun creating your package.
-4. If you need help creating a package, consider picking up our <a href="https://laravelpackage.training">Laravel Package Training</a> video course.
----
-<!--/delete-->
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+A comprehensive Laravel package for BossBoilerplate that provides a complete tenant registration system with modern web forms.
 
-## Support us
+## Features
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/:package_name.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/:package_name)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+-   **Public Registration Form**: Accessible before login for new tenant registration
+-   **Multi-tenant Support**: Built for `spatie/laravel-multitenancy`
+-   **Modern UI**: Tailwind CSS 4 best practices with responsive design
+-   **Accessibility**: WCAG compliant forms with proper ARIA labels
+-   **Validation**: Comprehensive form validation with error handling
+-   **Success Flow**: Complete onboarding experience with next steps guidance
 
 ## Installation
 
 You can install the package via composer:
 
 ```bash
-composer require :vendor_slug/:package_slug
+composer require base33/bossonboarding
 ```
 
 You can publish and run the migrations with:
 
 ```bash
-php artisan vendor:publish --tag=":package_slug-migrations"
+php artisan vendor:publish --tag="bossonboarding-migrations"
 php artisan migrate
 ```
 
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag=":package_slug-config"
+php artisan vendor:publish --tag="bossonboarding-config"
 ```
 
 This is the contents of the published config file:
 
 ```php
 return [
+    /*
+    |--------------------------------------------------------------------------
+    | BossOnboarding Configuration
+    |--------------------------------------------------------------------------
+    |
+    | Here you can configure the BossOnboarding package settings.
+    |
+    */
+
+    'default_domain_suffix' => env('BOSS_DOMAIN_SUFFIX', 'boss.ddev.site'),
+
+    'admin_panel_path' => env('BOSS_ADMIN_PANEL_PATH', '/app'),
 ];
 ```
 
-Optionally, you can publish the views using
+Optionally, you can publish the views using:
 
 ```bash
-php artisan vendor:publish --tag=":package_slug-views"
+php artisan vendor:publish --tag="bossonboarding-views"
+```
+
+## Setup
+
+### 1. Configure Multi-tenancy
+
+Ensure your multi-tenancy is properly configured with `spatie/laravel-multitenancy`:
+
+```php
+// config/multitenancy.php
+
+return [
+    'tenant_finder' => \App\Multitenancy\SubdomainTenantFinder::class,
+    'switch_tenant_tasks' => [
+        \App\Multitenancy\Tasks\SwitchTenantSessionTask::class,
+        \Spatie\Multitenancy\Tasks\SwitchTenantDatabaseTask::class,
+    ],
+    'central_domains' => [
+        'boss.ddev.site',
+    ],
+];
 ```
 
 ## Usage
 
+### Tenant Registration Form
+
+Access the registration form at:
+
+-   Registration: `https://your-domain.com/register-tenant`
+-   Success: `https://your-domain.com/register-tenant/success`
+
+### Features
+
+#### Tenant Registration Form
+
+-   **Tenant Information**: Name and subdomain configuration
+-   **Admin User Creation**: Complete admin account setup
+-   **Validation**: Comprehensive form validation
+-   **Error Handling**: User-friendly error messages
+-   **Responsive Design**: Works on all device sizes
+
+#### Success Page
+
+-   **Tenant Details**: Display created tenant information
+-   **Next Steps**: Guided onboarding process
+-   **Admin Panel Access**: Direct link to tenant admin panel
+-   **Additional Registration**: Option to register another tenant
+
+## Configuration
+
+### Customizing Domain Suffix
+
+Update the domain suffix in your config:
+
 ```php
-$variable = new VendorName\Skeleton();
-echo $variable->echoPhrase('Hello, VendorName!');
+// config/bossonboarding.php
+
+'default_domain_suffix' => env('BOSS_DOMAIN_SUFFIX', 'your-domain.com'),
+```
+
+### Customizing Admin Panel Path
+
+Update the admin panel path:
+
+```php
+// config/bossonboarding.php
+
+'admin_panel_path' => env('BOSS_ADMIN_PANEL_PATH', '/admin'),
+```
+
+## Customization
+
+### Styling
+
+The plugin uses Tailwind CSS 4 with a custom design system. You can customize the appearance by:
+
+1. Publishing the views:
+
+```bash
+php artisan vendor:publish --tag="bossonboarding-views"
+```
+
+2. Modifying the published views in `resources/views/vendor/bossonboarding/`
+
+### Form Validation
+
+Customize validation rules by extending the controller:
+
+```php
+// Extend the TenantRegistrationController
+
+class CustomTenantRegistrationController extends \Base33\BossOnboarding\Http\Controllers\TenantRegistrationController
+{
+    protected function validationRules(): array
+    {
+        return [
+            'tenant_name' => ['required', 'string', 'max:255'],
+            'tenant_domain' => ['required', 'string', 'max:255', 'unique:tenants,domain', 'regex:/^[a-zA-Z0-9-]+$/'],
+            'admin_name' => ['required', 'string', 'max:255'],
+            'admin_email' => ['required', 'string', 'email', 'max:255'],
+            'admin_password' => ['required', 'string', 'min:8', 'confirmed'],
+        ];
+    }
+}
 ```
 
 ## Testing
@@ -71,22 +173,14 @@ echo $variable->echoPhrase('Hello, VendorName!');
 composer test
 ```
 
-## Changelog
+## Security
 
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
-
-## Contributing
-
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
-
-## Security Vulnerabilities
-
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
+If you discover any security related issues, please email info@base33.it instead of using the issue tracker.
 
 ## Credits
 
-- [:author_name](https://github.com/:author_username)
-- [All Contributors](../../contributors)
+-   [Francesco Mulassano](https://github.com/Base33)
+-   [All Contributors](../../contributors)
 
 ## License
 
