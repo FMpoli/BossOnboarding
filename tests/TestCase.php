@@ -2,9 +2,9 @@
 
 namespace Base33\BossOnboarding\Tests;
 
+use Base33\BossOnboarding\BossOnboardingServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Base33\BossOnboarding\BossOnboardingServiceProvider;
 
 class TestCase extends Orchestra
 {

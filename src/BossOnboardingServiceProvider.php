@@ -2,9 +2,9 @@
 
 namespace Base33\BossOnboarding;
 
+use Base33\BossOnboarding\Commands\BossOnboardingCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Base33\BossOnboarding\Commands\BossOnboardingCommand;
 
 class BossOnboardingServiceProvider extends PackageServiceProvider
 {
@@ -23,6 +23,4 @@ class BossOnboardingServiceProvider extends PackageServiceProvider
             ->hasMigration('create_bossonboarding_table')
             ->hasCommand(BossOnboardingCommand::class);
     }
-
-
 }

@@ -4,14 +4,12 @@ namespace Base33\BossOnboarding\Http\Controllers;
 
 use App\Models\Tenant;
 use App\Models\User;
+use Illuminate\Database\Migrations\Migrator;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
-use Illuminate\Database\Migrations\Migrator;
 
 class TenantRegistrationController extends Controller
 {
@@ -46,7 +44,7 @@ class TenantRegistrationController extends Controller
         $tenant->createDatabase();
 
         // Run migrations for the new tenant and create a default admin user
-        $tenant->execute(function () use ($tenant, $data) {
+        $tenant->execute(function () use ($data) {
             $migrator = app(Migrator::class);
             $migrator->setConnection('tenant');
             $migrator->getRepository()->setSource('tenant');

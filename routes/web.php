@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Base33\BossOnboarding\Http\Controllers\TenantRegistrationController;
+use Illuminate\Support\Facades\Route;
 
 Route::middleware('web')->group(function () {
     Route::get('/register-tenant', [TenantRegistrationController::class, 'create'])->name('tenant.register.create');
