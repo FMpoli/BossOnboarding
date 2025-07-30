@@ -15,7 +15,8 @@ class TenantRegistrationController extends Controller
 {
     public function create()
     {
-        return view('bossonboarding::register-tenant');
+
+        return view('bossonboarding::register');
     }
 
     public function store(Request $request)
@@ -60,7 +61,7 @@ class TenantRegistrationController extends Controller
             ]);
         });
 
-        return redirect()->route('tenant.register.success')->with('tenant', $tenant);
+        return redirect()->route('register.success')->with('tenant', $tenant);
     }
 
     public function success()

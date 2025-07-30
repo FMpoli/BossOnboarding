@@ -38,7 +38,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Base33\\BossOnboarding\\": ["src/", "database/"]
+            "Base33\\BossOnboarding\\": ["src/", "database/", "livewire/"]
         }
     },
     "autoload-dev": {
