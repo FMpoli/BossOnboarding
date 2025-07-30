@@ -2,13 +2,12 @@
 
 namespace Base33\BossOnboarding\Http\Livewire;
 
-use Livewire\Component;
-use Illuminate\Contracts\View\View;
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Schemas\Schema;
-use Filament\Forms\Components\TextInput;
-use Illuminate\Support\Facades\Artisan;
+use Illuminate\Contracts\View\View;
+use Livewire\Component;
 
 class RegisterTenant extends Component implements HasSchemas
 {
@@ -58,7 +57,7 @@ class RegisterTenant extends Component implements HasSchemas
     {
         logger('Create method called');
         $data = $this->registerTenantSchema->getState();
-        logger('Form data: ' . json_encode($data));
+        logger('Form data: '.json_encode($data));
 
         try {
             // 1. Crea il tenant nella tabella tenants (landlord)
@@ -85,7 +84,7 @@ class RegisterTenant extends Component implements HasSchemas
             $migrator->run([
                 base_path('database/migrations/tenant'),
             ]);
-            logger("Migration eseguite per il tenant");
+            logger('Migration eseguite per il tenant');
 
             // 4. Crea il primo utente admin per il tenant
             \App\Models\User::create([
@@ -93,7 +92,7 @@ class RegisterTenant extends Component implements HasSchemas
                 'email' => $data['user_email'],
                 'password' => \Illuminate\Support\Facades\Hash::make($data['user_password']),
             ]);
-            logger("Utente admin creato per il tenant");
+            logger('Utente admin creato per il tenant');
 
             $spatieTenant->forget();
 
@@ -105,8 +104,8 @@ class RegisterTenant extends Component implements HasSchemas
             logger('Onboarding completato!');
 
         } catch (\Exception $e) {
-            logger('Errore durante la creazione del tenant: ' . $e->getMessage());
-            session()->flash('error', 'Errore durante la creazione del tenant: ' . $e->getMessage());
+            logger('Errore durante la creazione del tenant: '.$e->getMessage());
+            session()->flash('error', 'Errore durante la creazione del tenant: '.$e->getMessage());
         }
     }
 

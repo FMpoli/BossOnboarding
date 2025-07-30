@@ -2,18 +2,16 @@
 
 namespace Base33\BossOnboarding;
 
+use Base33\BossOnboarding\Http\Livewire\RegisterTenant;
+use Illuminate\Support\Facades\Route;
+use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Base33\BossOnboarding\Http\Livewire\RegisterTenant;
-use Livewire\Livewire;
-use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 
 class BossOnboardingServiceProvider extends PackageServiceProvider
 {
-
     public function configurePackage(Package $package): void
     {
         $package
