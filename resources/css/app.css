@@ -1,1 +1,140 @@
 @import "tailwindcss";
+
+/* Modern Filament 4 Form Styling */
+.fi-fo-field-label {
+    @apply text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 block;
+}
+
+.fi-fo-field-label-content {
+    @apply flex items-center gap-1;
+}
+
+.fi-fo-field-label-required-mark {
+    @apply text-red-500 font-bold;
+}
+
+.fi-input-wrp {
+    @apply relative;
+}
+
+.fi-input-wrp-content-ctn {
+    @apply relative;
+}
+
+.fi-input {
+    @apply w-full px-4 py-3 text-gray-900 bg-white border border-gray-300 rounded-xl shadow-sm
+           focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
+           placeholder:text-gray-400
+           dark:bg-gray-800 dark:border-gray-600 dark:text-white
+           dark:focus:ring-indigo-400 dark:focus:border-indigo-400
+           dark:placeholder:text-gray-500
+           transition-all duration-200;
+}
+
+/* Input focus states */
+.fi-input:focus {
+    @apply transform scale-[1.02] shadow-lg;
+}
+
+/* Input hover states */
+.fi-input:hover:not(:focus) {
+    @apply border-gray-400 dark:border-gray-500;
+}
+
+/* Error states */
+.fi-input-wrp.has-error .fi-input {
+    @apply border-red-300 focus:ring-red-500 focus:border-red-500
+           dark:border-red-600 dark:focus:ring-red-400 dark:focus:border-red-400;
+}
+
+/* Success states */
+.fi-input-wrp.has-success .fi-input {
+    @apply border-green-300 focus:ring-green-500 focus:border-green-500
+           dark:border-green-600 dark:focus:ring-green-400 dark:focus:border-green-400;
+}
+
+/* Form field spacing */
+.fi-fo-field {
+    @apply mb-6;
+}
+
+/* Form container */
+.fi-fo-form {
+    @apply space-y-6;
+}
+
+/* Button styling for Filament */
+.fi-btn {
+    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-semibold
+           rounded-xl transition-all duration-200 transform hover:scale-105
+           focus:outline-none focus:ring-2 focus:ring-offset-2;
+}
+
+.fi-btn-primary {
+    @apply bg-gradient-to-r from-indigo-600 to-purple-600 text-white
+           hover:from-indigo-700 hover:to-purple-700
+           focus:ring-indigo-500 shadow-lg hover:shadow-xl;
+}
+
+.fi-btn-secondary {
+    @apply bg-gray-100 text-gray-700 border border-gray-300
+           hover:bg-gray-200 hover:border-gray-400
+           focus:ring-gray-500
+           dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600
+           dark:hover:bg-gray-600 dark:hover:border-gray-500;
+}
+
+/* Social login buttons */
+.fi-social-btn {
+    @apply w-full inline-flex items-center justify-center px-4 py-3
+           text-gray-700 bg-white border border-gray-300 rounded-xl
+           hover:bg-gray-50 hover:border-gray-400
+           transition-all duration-200 font-medium
+           dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600
+           dark:hover:bg-gray-700 dark:hover:border-gray-500;
+}
+
+/* Form section dividers */
+.fi-form-divider {
+    @apply relative my-8;
+}
+
+.fi-form-divider::before {
+    @apply content-[''] absolute top-1/2 left-0 right-0 h-px bg-gray-300 dark:bg-gray-600;
+}
+
+.fi-form-divider-text {
+    @apply relative bg-white dark:bg-gray-900 px-4 text-sm text-gray-500 dark:text-gray-400;
+}
+
+/* Form card styling */
+.fi-form-card {
+    @apply bg-white/80 backdrop-blur-sm rounded-2xl shadow-2xl p-8
+           border border-white/20 dark:bg-gray-800/90 dark:border-gray-700/50;
+}
+
+/* Link styling */
+.fi-link {
+    @apply text-indigo-600 hover:text-indigo-500 dark:text-indigo-400
+           font-medium hover:underline transition-colors;
+}
+
+/* Loading states */
+.fi-loading {
+    @apply opacity-50 pointer-events-none;
+}
+
+.fi-loading .fi-input {
+    @apply animate-pulse;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .fi-input {
+        @apply px-3 py-2.5 text-sm;
+    }
+
+    .fi-btn {
+        @apply px-4 py-2.5 text-sm;
+    }
+}

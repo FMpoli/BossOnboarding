@@ -17,9 +17,19 @@ class RegisterTenant extends Component implements HasSchemas
 
     public function mount(): void
     {
-        // Inizializza lo schema con dati vuoti
-        $this->form->fill();
-        logger('RegisterTenant component mounted');
+        // Precompila il dominio se fornito come parametro
+        $domain = request()->get('domain');
+
+        if ($domain) {
+            $this->data = [
+                'tenant_domain' => $domain,
+                'tenant_name' => ucfirst($domain), // Capitalizza il nome del tenant
+            ];
+        }
+
+        // Inizializza lo schema con i dati
+        $this->form->fill($this->data);
+        logger('RegisterTenant component mounted with domain: ' . ($domain ?? 'none'));
     }
 
     public function form(Schema $schema): Schema
@@ -36,11 +46,6 @@ class RegisterTenant extends Component implements HasSchemas
                     ->label('Dominio')
                     ->required()
                     ->placeholder('mio-tenant'),
-
-                TextInput::make('tenant_database')
-                    ->label('Database')
-                    ->required()
-                    ->placeholder('tenant_mio_tenant'),
                 TextInput::make('user_name')
                     ->label('Nome Utente')
                     ->required()
@@ -67,17 +72,20 @@ class RegisterTenant extends Component implements HasSchemas
         logger('Schema data: '.json_encode($data));
 
         try {
+            // Genera un nome database unico
+            $databaseName = 'tenant_' . $data['tenant_domain'] . '_' . strtolower(str_replace(['-', '_'], '', uniqid()));
+
             // 1. Crea il tenant nella tabella tenants (landlord)
             $tenant = \App\Models\Tenant::create([
                 'name' => $data['tenant_name'],
                 'domain' => $data['tenant_domain'],
-                'database' => $data['tenant_database'],
+                'database' => $databaseName,
             ]);
-            logger("Tenant '{$data['tenant_name']}' creato nella tabella tenants");
+            logger("Tenant '{$data['tenant_name']}' creato nella tabella tenants con database '{$databaseName}'");
 
             // 2. Crea il database del tenant
             $tenant->createDatabase();
-            logger("Database '{$data['tenant_database']}' creato per il tenant");
+            logger("Database '{$databaseName}' creato per il tenant");
 
             // 3. Esegui le migration per il tenant usando l'approccio del comando
             $spatieTenant = \Spatie\Multitenancy\Models\Tenant::find($tenant->id);

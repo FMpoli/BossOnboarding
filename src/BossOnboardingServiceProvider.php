@@ -19,7 +19,7 @@ class BossOnboardingServiceProvider extends PackageServiceProvider
             ->hasRoutes('web')
             ->hasMigration('create_bossonboarding_table')
             ->hasCommand(PublishViewsCommand::class)
-            ->hasAssets();
+            ->hasAssets('bossonboarding-assets');
     }
 
     public function boot(): void

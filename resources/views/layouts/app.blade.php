@@ -13,7 +13,8 @@
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700" rel="stylesheet" />
 
     <!-- Styles -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="{{ asset('vendor/bossonboarding/css/app.css') }}">
+    <script src="{{ asset('vendor/bossonboarding/js/app.js') }}" defer></script>
 
     @livewireStyles
     @stack('styles')

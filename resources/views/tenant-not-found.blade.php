@@ -24,7 +24,7 @@
 
             <div class="space-y-4 mb-8">
                 <p class="text-gray-600 text-center dark:text-gray-300 leading-relaxed">
-                    Il dominio <span class="font-mono bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-sm font-semibold">{{ request()->get('domain', request()->getHost()) }}.bossnew.ddev.site</span> non è ancora configurato.
+                    Il dominio <span class="font-mono bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-sm font-semibold">{{ request()->get('domain', request()->getHost()) }}.{{ config('bossonboarding.default_domain_suffix') }}</span> non è ancora configurato.
                 </p>
 
                 <p class="text-gray-600 text-center dark:text-gray-300 leading-relaxed">
@@ -34,7 +34,7 @@
 
             <!-- Enhanced Action Buttons -->
             <div class="space-y-4">
-                <a href="{{ route('register.tenant') }}"
+                <a href="{{ route('register.tenant', ['domain' => request()->get('domain', str_replace('.bossnew.ddev.site', '', request()->getHost()))]) }}"
                    class="group w-full inline-flex justify-center items-center px-6 py-4 text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                     <svg class="w-5 h-5 mr-3 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
@@ -42,7 +42,7 @@
                     Crea il tuo ambiente
                 </a>
 
-                <a href="https://bossnew.ddev.site"
+                <a href="https://{{ config('bossonboarding.default_domain_suffix') }}"
                    class="group w-full inline-flex justify-center items-center px-6 py-4 text-gray-700 bg-gray-50 hover:bg-gray-100 rounded-xl transition-all duration-300 font-medium border border-gray-200 hover:border-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 dark:border-gray-600 dark:hover:border-gray-500">
                     <svg class="w-5 h-5 mr-3 group-hover:-translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>

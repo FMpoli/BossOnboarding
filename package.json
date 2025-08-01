@@ -3,7 +3,8 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
-    "dev": "vite"
+    "dev": "vite",
+    "build:assets": "npm run build && cd ../../ && ddev artisan vendor:publish --tag=bossonboarding-assets --force"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",

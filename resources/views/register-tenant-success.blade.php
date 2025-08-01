@@ -34,12 +34,7 @@
 
             <div>
                 <label class="block text-sm font-medium text-gray-500 dark:text-gray-400">Dominio</label>
-                <p class="mt-1 text-sm text-gray-900 dark:text-white font-medium">{{ $tenant->domain }}.boss.ddev.site</p>
-            </div>
-
-            <div>
-                <label class="block text-sm font-medium text-gray-500 dark:text-gray-400">Database</label>
-                <p class="mt-1 text-sm text-gray-900 dark:text-white font-medium">{{ $tenant->database }}</p>
+                <p class="mt-1 text-sm text-gray-900 dark:text-white font-medium">{{ $tenant->domain }}.{{ config('bossonboarding.default_domain_suffix') }}</p>
             </div>
         </div>
     </div>
@@ -73,7 +68,7 @@
 
     <!-- Action Buttons -->
     <div class="space-y-3">
-        <a href="https://{{ $tenant->domain }}.boss.ddev.site/app"
+        <a href="https://{{ $tenant->domain }}.{{ config('bossonboarding.default_domain_suffix') }}{{ config('bossonboarding.admin_panel_path') }}"
            class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-200">
             Accedi al tuo Tenant
         </a>
