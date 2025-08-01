@@ -5,8 +5,8 @@ namespace Base33\BossOnboarding\Http\Livewire;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
-use Illuminate\Contracts\View\View;
 use Filament\Schemas\Schema;
+use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
 class RegisterTenant extends Component implements HasSchemas
@@ -22,51 +22,49 @@ class RegisterTenant extends Component implements HasSchemas
         logger('RegisterTenant component mounted');
     }
 
-
-
     public function form(Schema $schema): Schema
     {
         return $schema
-        ->components([
+            ->components([
 
-                    TextInput::make('tenant_name')
-                        ->label('Nome Tenant')
-                        ->required()
-                        ->placeholder('Nome del tuo tenant'),
+                TextInput::make('tenant_name')
+                    ->label('Nome Tenant')
+                    ->required()
+                    ->placeholder('Nome del tuo tenant'),
 
-                    TextInput::make('tenant_domain')
-                        ->label('Dominio')
-                        ->required()
-                        ->placeholder('mio-tenant'),
+                TextInput::make('tenant_domain')
+                    ->label('Dominio')
+                    ->required()
+                    ->placeholder('mio-tenant'),
 
-                    TextInput::make('tenant_database')
-                        ->label('Database')
-                        ->required()
-                        ->placeholder('tenant_mio_tenant'),
-                    TextInput::make('user_name')
-                        ->label('Nome Utente')
-                        ->required()
-                        ->placeholder('Il tuo nome'),
+                TextInput::make('tenant_database')
+                    ->label('Database')
+                    ->required()
+                    ->placeholder('tenant_mio_tenant'),
+                TextInput::make('user_name')
+                    ->label('Nome Utente')
+                    ->required()
+                    ->placeholder('Il tuo nome'),
 
-                    TextInput::make('user_email')
-                        ->label('Email')
-                        ->email()
-                        ->required()
-                        ->placeholder('admin@example.com'),
+                TextInput::make('user_email')
+                    ->label('Email')
+                    ->email()
+                    ->required()
+                    ->placeholder('admin@example.com'),
 
-                    TextInput::make('user_password')
-                        ->label('Password')
-                        ->password()
-                        ->required()
-                        ->placeholder('Password sicura'),
-        ])->statePath('data');
+                TextInput::make('user_password')
+                    ->label('Password')
+                    ->password()
+                    ->required()
+                    ->placeholder('Password sicura'),
+            ])->statePath('data');
     }
 
     public function create()
     {
         logger('Create method called');
         $data = $this->form->getState();
-        logger('Schema data: ' . json_encode($data));
+        logger('Schema data: '.json_encode($data));
 
         try {
             // 1. Crea il tenant nella tabella tenants (landlord)
@@ -119,6 +117,7 @@ class RegisterTenant extends Component implements HasSchemas
             session()->flash('error', 'Errore durante la creazione del tenant: '.$e->getMessage());
         }
     }
+
     public function render(): View
     {
         return view('bossonboarding::livewire.register-tenant');

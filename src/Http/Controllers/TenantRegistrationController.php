@@ -68,7 +68,7 @@ class TenantRegistrationController extends Controller
         // Debug: check if tenant data is in session
         $tenant = session('tenant');
 
-        if (!$tenant) {
+        if (! $tenant) {
             // If no tenant in session, redirect back to registration
             return redirect()->route('register.tenant')->with('error', 'Nessun tenant trovato nella sessione');
         }
