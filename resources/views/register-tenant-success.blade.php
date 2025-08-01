@@ -12,12 +12,9 @@
         <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 
         <!-- Styles -->
-        @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-            @vite(['resources/css/app.css', 'resources/js/app.js'])
-        @endif
-
-        <!-- Filament Assets -->
+        <!-- Use compiled assets instead of Vite -->
         <link rel="stylesheet" href="{{ asset('vendor/bossonboarding/css/app.css') }}">
+        <script src="{{ asset('vendor/bossonboarding/js/app.js') }}" defer></script>
 
         @livewireStyles
     </head>
@@ -61,7 +58,7 @@
                             Il tuo tenant è stato creato con successo e è pronto per essere utilizzato.
                         </p>
 
-                        @if(session('tenant'))
+                        @if($tenant)
                             <div class="bg-white dark:bg-gray-800 shadow rounded-lg p-6 mb-8">
                                 <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">
                                     Dettagli del Tenant
@@ -69,23 +66,23 @@
                                 <dl class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                                     <div>
                                         <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Nome Tenant</dt>
-                                        <dd class="text-lg text-gray-900 dark:text-white">{{ session('tenant')->name }}</dd>
+                                        <dd class="text-lg text-gray-900 dark:text-white">{{ $tenant->name }}</dd>
                                     </div>
                                     <div>
                                         <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Dominio</dt>
-                                        <dd class="text-lg text-gray-900 dark:text-white">{{ session('tenant')->domain }}</dd>
+                                        <dd class="text-lg text-gray-900 dark:text-white">{{ $tenant->domain }}</dd>
                                     </div>
                                     <div>
                                         <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Database</dt>
-                                        <dd class="text-lg text-gray-900 dark:text-white">{{ session('tenant')->database }}</dd>
+                                        <dd class="text-lg text-gray-900 dark:text-white">{{ $tenant->database }}</dd>
                                     </div>
                                     <div>
                                         <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">URL</dt>
                                         <dd class="text-lg text-gray-900 dark:text-white">
-                                            <a href="https://{{ session('tenant')->domain }}.{{ config('app.domain', 'boss.ddev.site') }}"
+                                            <a href="https://{{ $tenant->domain }}.{{ config('app.domain', 'boss.ddev.site') }}"
                                                class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300 underline"
                                                target="_blank">
-                                                https://{{ session('tenant')->domain }}.{{ config('app.domain', 'boss.ddev.site') }}
+                                                https://{{ $tenant->domain }}.{{ config('app.domain', 'boss.ddev.site') }}
                                             </a>
                                         </dd>
                                     </div>
@@ -94,7 +91,7 @@
                         @endif
 
                         <div class="space-y-4">
-                            <a href="https://{{ session('tenant')->domain ?? 'your-tenant' }}.{{ config('app.domain', 'boss.ddev.site') }}"
+                            <a href="https://{{ $tenant->domain ?? 'your-tenant' }}.{{ config('app.domain', 'boss.ddev.site') }}"
                                target="_blank"
                                class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -143,6 +140,5 @@
         </div>
 
         @livewireScripts
-        <script src="{{ asset('js/filament/schemas/schemas.js') }}"></script>
     </body>
 </html>

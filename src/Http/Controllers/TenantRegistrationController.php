@@ -15,7 +15,6 @@ class TenantRegistrationController extends Controller
 {
     public function create()
     {
-
         return view('bossonboarding::register');
     }
 
@@ -66,6 +65,14 @@ class TenantRegistrationController extends Controller
 
     public function success()
     {
-        return view('bossonboarding::register-tenant-success');
+        // Debug: check if tenant data is in session
+        $tenant = session('tenant');
+
+        if (!$tenant) {
+            // If no tenant in session, redirect back to registration
+            return redirect()->route('register.tenant')->with('error', 'Nessun tenant trovato nella sessione');
+        }
+
+        return view('bossonboarding::register-tenant-success', compact('tenant'));
     }
 }

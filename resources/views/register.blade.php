@@ -1,24 +1,19 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrazione Tenant</title>
-    @livewireStyles
+@extends('bossonboarding::layouts.auth')
 
-    <!-- Filament Schemas CSS -->
-    <link rel="stylesheet" href="{{ asset('vendor/bossonboarding/css/app.css') }}">
-</head>
-<body>
-    <div class="container mx-auto px-4 py-8">
-        <h1 class="text-3xl font-bold mb-8">Register</h1>
+@section('title', 'Registrazione Tenant')
 
-        @livewire('register-tenant')
-    </div>
+@section('auth-title', 'Crea il tuo tenant')
+@section('auth-subtitle', 'Registra un nuovo tenant per iniziare')
 
-    @livewireScripts
+@section('auth-content')
+    @livewire('register-tenant')
+@endsection
 
-    <!-- Filament Schemas JS -->
-    <script src="{{ asset('js/filament/schemas/schemas.js') }}"></script>
-</body>
-</html>
+@section('auth-links')
+    <p class="text-sm text-gray-600 dark:text-gray-400">
+        Hai già un account?
+        <a href="{{ route('login') }}" class="font-semibold text-indigo-600 transition-colors duration-200 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300">
+            Accedi qui
+        </a>
+    </p>
+@endsection

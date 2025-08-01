@@ -5,11 +5,9 @@ namespace Base33\BossOnboarding;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Base33\BossOnboarding\Http\Livewire\RegisterTenant;
+use Base33\BossOnboarding\Console\Commands\PublishViewsCommand;
 use Livewire\Livewire;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
-use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
-use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 
 class BossOnboardingServiceProvider extends PackageServiceProvider
 {
@@ -21,7 +19,9 @@ class BossOnboardingServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasViews()
             ->hasRoutes('web')
-            ->hasMigration('create_bossonboarding_table');
+            ->hasMigration('create_bossonboarding_table')
+            ->hasCommand(PublishViewsCommand::class)
+            ->hasAssets();
     }
 
     public function boot(): void
@@ -30,16 +30,5 @@ class BossOnboardingServiceProvider extends PackageServiceProvider
 
         // Register Livewire components
         Livewire::component('register-tenant', RegisterTenant::class);
-
-        // Register tenant routes manually
-        Route::middleware([
-            'web',
-            InitializeTenancyByDomain::class,
-            PreventAccessFromCentralDomains::class,
-        ])->group(function () {
-            Route::get('/', function () {
-                return view('bossonboarding::tenant-welcome');
-            })->name('tenant.welcome');
-        });
     }
 }

@@ -2,13 +2,12 @@
 
 namespace Base33\BossOnboarding\Http\Livewire;
 
-use Livewire\Component;
-use Illuminate\Contracts\View\View;
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
+use Illuminate\Contracts\View\View;
 use Filament\Schemas\Schema;
-use Filament\Forms\Components\TextInput;
-use Illuminate\Support\Facades\Artisan;
+use Livewire\Component;
 
 class RegisterTenant extends Component implements HasSchemas
 {
@@ -18,47 +17,56 @@ class RegisterTenant extends Component implements HasSchemas
 
     public function mount(): void
     {
-        // Inizializza il form con dati vuoti
-        $this->registerTenantSchema->fill();
+        // Inizializza lo schema con dati vuoti
+        $this->form->fill();
         logger('RegisterTenant component mounted');
     }
 
-    public function registerTenantSchema(Schema $schema): Schema
+
+
+    public function form(Schema $schema): Schema
     {
         return $schema
-            ->components([
-                // Dati Tenant
-                TextInput::make('tenant_name')
-                    ->label('Nome tenant')
-                    ->required(),
-                TextInput::make('tenant_domain')
-                    ->label('Dominio tenant')
-                    ->required(),
-                TextInput::make('tenant_database')
-                    ->label('Database tenant')
-                    ->required(),
+        ->components([
 
-                // Dati Utente
-                TextInput::make('user_name')
-                    ->label('Nome utente admin')
-                    ->required(),
-                TextInput::make('user_email')
-                    ->label('Email utente admin')
-                    ->email()
-                    ->required(),
-                TextInput::make('user_password')
-                    ->label('Password utente admin')
-                    ->password()
-                    ->required(),
-            ])
-            ->statePath('data');
+                    TextInput::make('tenant_name')
+                        ->label('Nome Tenant')
+                        ->required()
+                        ->placeholder('Nome del tuo tenant'),
+
+                    TextInput::make('tenant_domain')
+                        ->label('Dominio')
+                        ->required()
+                        ->placeholder('mio-tenant'),
+
+                    TextInput::make('tenant_database')
+                        ->label('Database')
+                        ->required()
+                        ->placeholder('tenant_mio_tenant'),
+                    TextInput::make('user_name')
+                        ->label('Nome Utente')
+                        ->required()
+                        ->placeholder('Il tuo nome'),
+
+                    TextInput::make('user_email')
+                        ->label('Email')
+                        ->email()
+                        ->required()
+                        ->placeholder('admin@example.com'),
+
+                    TextInput::make('user_password')
+                        ->label('Password')
+                        ->password()
+                        ->required()
+                        ->placeholder('Password sicura'),
+        ])->statePath('data');
     }
 
-    public function create(): void
+    public function create()
     {
         logger('Create method called');
-        $data = $this->registerTenantSchema->getState();
-        logger('Form data: ' . json_encode($data));
+        $data = $this->form->getState();
+        logger('Schema data: ' . json_encode($data));
 
         try {
             // 1. Crea il tenant nella tabella tenants (landlord)
@@ -97,25 +105,20 @@ class RegisterTenant extends Component implements HasSchemas
 
             $spatieTenant->forget();
 
-            // Reset del form
-            $this->registerTenantSchema->fill();
+            // Reset del schema
+            $this->form->fill();
 
-            // Messaggio di successo
-            session()->flash('message', 'Tenant creato con successo!');
+            // Salva il tenant nella sessione e reindirizza alla pagina di successo
+            session(['tenant' => $tenant]);
             logger('Onboarding completato!');
+
+            return redirect()->route('register.success');
 
         } catch (\Exception $e) {
             logger('Errore durante la creazione del tenant: ' . $e->getMessage());
             session()->flash('error', 'Errore durante la creazione del tenant: ' . $e->getMessage());
         }
     }
-
-    public function test(): void
-    {
-        logger('Test method called');
-        dd('Test method works!');
-    }
-
     public function render(): View
     {
         return view('bossonboarding::livewire.register-tenant');
