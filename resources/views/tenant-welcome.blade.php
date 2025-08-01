@@ -12,10 +12,7 @@
         <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 
         <!-- Styles -->
-        <!-- Use compiled assets for tenants instead of Vite -->
-        <link rel="stylesheet" href="{{ asset('vendor/bossonboarding/css/app.css') }}">
-        <script src="{{ asset('vendor/bossonboarding/js/app.js') }}" defer></script>
-
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
         @livewireStyles
     </head>
     <body class="bg-gray-50 dark:bg-gray-900">

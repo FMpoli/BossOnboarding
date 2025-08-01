@@ -1,4 +1,4 @@
-@extends('bossonboarding::layouts.modern-auth')
+@extends('bossonboarding::layouts.auth')
 
 @section('title', 'Registrazione Completata - BossPlatform')
 
@@ -6,7 +6,7 @@
 
 @section('auth-content')
     <!-- Success Header -->
-    <div class="text-center mb-8">
+    <div class="mb-8 text-center">
         <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 dark:bg-green-900 mb-4">
             <svg class="h-8 w-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
@@ -25,18 +25,18 @@
         <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
             Dettagli del Tenant
         </h2>
-        
+
         <div class="space-y-4">
             <div>
                 <label class="block text-sm font-medium text-gray-500 dark:text-gray-400">Nome Tenant</label>
                 <p class="mt-1 text-sm text-gray-900 dark:text-white font-medium">{{ $tenant->name }}</p>
             </div>
-            
+
             <div>
                 <label class="block text-sm font-medium text-gray-500 dark:text-gray-400">Dominio</label>
                 <p class="mt-1 text-sm text-gray-900 dark:text-white font-medium">{{ $tenant->domain }}.boss.ddev.site</p>
             </div>
-            
+
             <div>
                 <label class="block text-sm font-medium text-gray-500 dark:text-gray-400">Database</label>
                 <p class="mt-1 text-sm text-gray-900 dark:text-white font-medium">{{ $tenant->database }}</p>
@@ -73,12 +73,12 @@
 
     <!-- Action Buttons -->
     <div class="space-y-3">
-        <a href="https://{{ $tenant->domain }}.boss.ddev.site/app" 
+        <a href="https://{{ $tenant->domain }}.boss.ddev.site/app"
            class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-200">
             Accedi al tuo Tenant
         </a>
-        
-        <a href="{{ url('/') }}" 
+
+        <a href="{{ url('/') }}"
            class="w-full flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-200">
             Torna alla Home
         </a>
@@ -93,7 +93,7 @@
                 Contatta il supporto
             </a>
         </p>
-        
+
         <div class="text-xs text-gray-500 dark:text-gray-400 space-y-1">
             <p>
                 <a href="#" class="hover:text-gray-700 dark:hover:text-gray-300">

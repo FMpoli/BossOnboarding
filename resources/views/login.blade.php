@@ -1,4 +1,4 @@
-@extends('bossonboarding::layouts.modern-auth')
+@extends('bossonboarding::layouts.auth')
 
 @section('title', 'Accedi - BossPlatform')
 
@@ -6,7 +6,7 @@
 
 @section('auth-content')
     <!-- Header -->
-    <div class="text-center mb-8">
+    <div class="mb-8 text-center">
         <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
             Accedi
         </h1>
@@ -18,13 +18,13 @@
     <!-- Login Form -->
     <form method="POST" action="{{ route('login') }}" class="space-y-6">
         @csrf
-        
+
         <!-- Email Field -->
         <div>
             <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Email <span class="text-red-500">*</span>
             </label>
-            <input id="email" name="email" type="email" required 
+            <input id="email" name="email" type="email" required
                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                    placeholder="La tua email">
             @error('email')
@@ -38,10 +38,10 @@
                 Password <span class="text-red-500">*</span>
             </label>
             <div class="relative">
-                <input id="password" name="password" type="password" required 
+                <input id="password" name="password" type="password" required
                        class="w-full px-3 py-2 pr-10 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                        placeholder="La tua password">
-                <button type="button" onclick="togglePassword()" 
+                <button type="button" onclick="togglePassword()"
                         class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
                     <svg id="eye-icon" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -57,7 +57,7 @@
         <!-- Remember Me & Forgot Password -->
         <div class="flex items-center justify-between">
             <div class="flex items-center">
-                <input id="remember" name="remember" type="checkbox" 
+                <input id="remember" name="remember" type="checkbox"
                        class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
                 <label for="remember" class="ml-2 block text-sm text-gray-900 dark:text-gray-300">
                     Ricordami
@@ -72,7 +72,7 @@
 
         <!-- Submit Button -->
         <div>
-            <button type="submit" 
+            <button type="submit"
                     class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-200">
                 Accedi
             </button>
@@ -119,7 +119,7 @@
                 Crea un account
             </a>
         </p>
-        
+
         <div class="text-xs text-gray-500 dark:text-gray-400 space-y-1">
             <p>
                 <a href="{{ route('password.request') }}" class="hover:text-gray-700 dark:hover:text-gray-300">
@@ -144,7 +144,7 @@
 function togglePassword() {
     const passwordInput = document.getElementById('password');
     const eyeIcon = document.getElementById('eye-icon');
-    
+
     if (passwordInput.type === 'password') {
         passwordInput.type = 'text';
         eyeIcon.innerHTML = `

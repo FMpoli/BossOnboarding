@@ -28,16 +28,17 @@ class PublishViewsCommand extends Command
     {
         $this->info('Publishing BossOnboarding views...');
 
-        $sourcePath = __DIR__ . '/../../../resources/views';
+        $sourcePath = __DIR__.'/../../../resources/views';
         $destinationPath = resource_path('views/vendor/bossonboarding');
 
-        if (!File::exists($sourcePath)) {
+        if (! File::exists($sourcePath)) {
             $this->error('Source views directory not found!');
+
             return 1;
         }
 
         // Create destination directory if it doesn't exist
-        if (!File::exists($destinationPath)) {
+        if (! File::exists($destinationPath)) {
             File::makeDirectory($destinationPath, 0755, true);
         }
 
@@ -45,7 +46,7 @@ class PublishViewsCommand extends Command
         $this->copyDirectory($sourcePath, $destinationPath);
 
         $this->info('BossOnboarding views published successfully!');
-        $this->info('Views are now available at: ' . $destinationPath);
+        $this->info('Views are now available at: '.$destinationPath);
 
         return 0;
     }
@@ -59,17 +60,17 @@ class PublishViewsCommand extends Command
 
         foreach ($files as $file) {
             $relativePath = $file->getRelativePathname();
-            $destinationFile = $destination . '/' . $relativePath;
+            $destinationFile = $destination.'/'.$relativePath;
             $destinationDir = dirname($destinationFile);
 
             // Create directory if it doesn't exist
-            if (!File::exists($destinationDir)) {
+            if (! File::exists($destinationDir)) {
                 File::makeDirectory($destinationDir, 0755, true);
             }
 
             // Check if file already exists
-            if (File::exists($destinationFile) && !$this->option('force')) {
-                if (!$this->confirm("File {$relativePath} already exists. Overwrite?")) {
+            if (File::exists($destinationFile) && ! $this->option('force')) {
+                if (! $this->confirm("File {$relativePath} already exists. Overwrite?")) {
                     continue;
                 }
             }

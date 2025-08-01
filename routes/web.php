@@ -1,7 +1,7 @@
 <?php
 
-use Base33\BossOnboarding\Http\Controllers\TenantRegistrationController;
 use Base33\BossOnboarding\Http\Controllers\AuthController;
+use Base33\BossOnboarding\Http\Controllers\TenantRegistrationController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('web')->group(function () {
