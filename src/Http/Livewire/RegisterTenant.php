@@ -29,7 +29,7 @@ class RegisterTenant extends Component implements HasSchemas
 
         // Inizializza lo schema con i dati
         $this->form->fill($this->data);
-        logger('RegisterTenant component mounted with domain: ' . ($domain ?? 'none'));
+        logger('RegisterTenant component mounted with domain: '.($domain ?? 'none'));
     }
 
     public function form(Schema $schema): Schema
@@ -73,7 +73,7 @@ class RegisterTenant extends Component implements HasSchemas
 
         try {
             // Genera un nome database unico
-            $databaseName = 'tenant_' . $data['tenant_domain'] . '_' . strtolower(str_replace(['-', '_'], '', uniqid()));
+            $databaseName = 'tenant_'.$data['tenant_domain'].'_'.strtolower(str_replace(['-', '_'], '', uniqid()));
 
             // 1. Crea il tenant nella tabella tenants (landlord)
             $tenant = \App\Models\Tenant::create([
