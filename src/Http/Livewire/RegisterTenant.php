@@ -93,7 +93,7 @@ class RegisterTenant extends Component implements HasSchemas
             $migrator->run([
                 base_path('database/migrations/tenant'),
             ]);
-            logger("Migration eseguite per il tenant");
+            logger('Migration eseguite per il tenant');
 
             // 4. Crea il primo utente admin per il tenant
             \App\Models\User::create([
@@ -101,7 +101,7 @@ class RegisterTenant extends Component implements HasSchemas
                 'email' => $data['user_email'],
                 'password' => \Illuminate\Support\Facades\Hash::make($data['user_password']),
             ]);
-            logger("Utente admin creato per il tenant");
+            logger('Utente admin creato per il tenant');
 
             $spatieTenant->forget();
 
@@ -115,8 +115,8 @@ class RegisterTenant extends Component implements HasSchemas
             return redirect()->route('register.success');
 
         } catch (\Exception $e) {
-            logger('Errore durante la creazione del tenant: ' . $e->getMessage());
-            session()->flash('error', 'Errore durante la creazione del tenant: ' . $e->getMessage());
+            logger('Errore durante la creazione del tenant: '.$e->getMessage());
+            session()->flash('error', 'Errore durante la creazione del tenant: '.$e->getMessage());
         }
     }
     public function render(): View

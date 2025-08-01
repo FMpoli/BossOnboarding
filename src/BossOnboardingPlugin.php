@@ -4,8 +4,6 @@ namespace Base33\BossOnboarding;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
-use Base33\BossOnboarding\BossOnboardingServiceProvider;
-use Livewire\Livewire;
 
 class BossOnboardingPlugin implements Plugin
 {
@@ -21,10 +19,7 @@ class BossOnboardingPlugin implements Plugin
         // The registration form is accessible publicly via web routes
     }
 
-    public function boot(Panel $panel): void
-    {
-
-    }
+    public function boot(Panel $panel): void {}
 
     public static function make(): static
     {
