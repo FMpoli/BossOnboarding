@@ -6,6 +6,7 @@ use Base33\BossOnboarding\Console\Commands\PublishViewsCommand;
 use Base33\BossOnboarding\Exceptions\Handler;
 use Base33\BossOnboarding\Http\Livewire\RegisterTenant;
 use Base33\BossOnboarding\Http\Middleware\EnsureTenantExists;
+use Base33\BossOnboarding\Http\Middleware\TenantRequired;
 use Base33\BossOnboarding\Http\Middleware\UnifiedErrorHandler;
 use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
@@ -21,6 +22,7 @@ class BossOnboardingServiceProvider extends PackageServiceProvider
             ->hasViews()
             ->hasRoutes('web')
             ->hasRoutes('central')
+            ->hasRoutes('tenant')
             ->hasMigration('create_bossonboarding_table')
             ->hasCommand(PublishViewsCommand::class)
             ->hasAssets('bossonboarding-assets');
@@ -35,6 +37,7 @@ class BossOnboardingServiceProvider extends PackageServiceProvider
 
         // Register middleware with high priority
         $this->app['router']->aliasMiddleware('ensure.tenant.exists', EnsureTenantExists::class);
+        $this->app['router']->aliasMiddleware('tenant.required', TenantRequired::class);
 
         // Register global middleware to catch all tenant requests
         $this->app['router']->pushMiddlewareToGroup('web', EnsureTenantExists::class);
