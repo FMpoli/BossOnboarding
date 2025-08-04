@@ -34,33 +34,38 @@ class TenantRegistrationController extends Controller
 
         $data = $validator->validated();
 
-        $tenant = Tenant::create([
-            'name' => $data['tenant_name'],
-            'domain' => $data['tenant_domain'],
-            'database' => Str::slug($data['tenant_name']),
-        ]);
+        try {
+            // Create tenant without using Filament
+            $tenant = new Tenant();
+            $tenant->name = $data['tenant_name'];
+            $tenant->domain = $data['tenant_domain'];
+            $tenant->database = Str::slug($data['tenant_name']);
+            $tenant->save();
 
-        // Create the tenant's database
-        $tenant->createDatabase();
+            // Create the tenant's database
+            $tenant->createDatabase();
 
-        // Run migrations for the new tenant and create a default admin user
-        $tenant->execute(function () use ($data) {
-            $migrator = app(Migrator::class);
-            $migrator->setConnection('tenant');
-            $migrator->getRepository()->setSource('tenant');
-            $migrator->getRepository()->createRepository();
-            $migrator->run([
-                base_path('database/migrations/tenant'),
-            ]);
+            // Run migrations for the new tenant and create a default admin user
+            $tenant->execute(function () use ($data) {
+                $migrator = app(Migrator::class);
+                $migrator->setConnection('tenant');
+                $migrator->getRepository()->setSource('tenant');
+                $migrator->getRepository()->createRepository();
+                $migrator->run([
+                    base_path('database/migrations/tenant'),
+                ]);
 
-            User::create([
-                'name' => $data['admin_name'],
-                'email' => $data['admin_email'],
-                'password' => Hash::make($data['admin_password']),
-            ]);
-        });
+                User::create([
+                    'name' => $data['admin_name'],
+                    'email' => $data['admin_email'],
+                    'password' => Hash::make($data['admin_password']),
+                ]);
+            });
 
-        return redirect()->route('register.success')->with('tenant', $tenant);
+            return redirect()->route('register.success')->with('tenant', $tenant);
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => 'Errore durante la creazione del tenant: ' . $e->getMessage()])->withInput();
+        }
     }
 
     public function success()

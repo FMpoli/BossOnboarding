@@ -83,4 +83,4 @@
 
         @livewireScripts
     </body>
-</html> 
+</html>

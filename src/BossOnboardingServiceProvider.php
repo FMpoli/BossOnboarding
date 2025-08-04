@@ -5,6 +5,9 @@ namespace Base33\BossOnboarding;
 use Base33\BossOnboarding\Console\Commands\PublishViewsCommand;
 use Base33\BossOnboarding\Http\Livewire\RegisterTenant;
 use Base33\BossOnboarding\Http\Middleware\EnsureTenantExists;
+use Base33\BossOnboarding\Http\Middleware\Tenant404Middleware;
+use Base33\BossOnboarding\Http\Middleware\UnifiedErrorHandler;
+use Base33\BossOnboarding\Exceptions\Handler;
 use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -31,7 +34,19 @@ class BossOnboardingServiceProvider extends PackageServiceProvider
         // Register Livewire components
         Livewire::component('register-tenant', RegisterTenant::class);
 
-        // Register middleware
+        // Register middleware with high priority
         $this->app['router']->aliasMiddleware('ensure.tenant.exists', EnsureTenantExists::class);
+
+        // Register global middleware to catch all tenant requests
+        $this->app['router']->pushMiddlewareToGroup('web', EnsureTenantExists::class);
+
+        // Register unified error handler for all domains
+        $this->app['router']->pushMiddlewareToGroup('web', UnifiedErrorHandler::class);
+
+        // Register custom exception handler
+        $this->app->singleton(
+            \Illuminate\Contracts\Debug\ExceptionHandler::class,
+            Handler::class
+        );
     }
 }
