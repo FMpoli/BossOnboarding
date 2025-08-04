@@ -3,11 +3,10 @@
 namespace Base33\BossOnboarding;
 
 use Base33\BossOnboarding\Console\Commands\PublishViewsCommand;
+use Base33\BossOnboarding\Exceptions\Handler;
 use Base33\BossOnboarding\Http\Livewire\RegisterTenant;
 use Base33\BossOnboarding\Http\Middleware\EnsureTenantExists;
-use Base33\BossOnboarding\Http\Middleware\Tenant404Middleware;
 use Base33\BossOnboarding\Http\Middleware\UnifiedErrorHandler;
-use Base33\BossOnboarding\Exceptions\Handler;
 use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;

@@ -20,16 +20,16 @@ class EnsureTenantExists
         }
 
         // Check if this is a tenant subdomain
-        if (!str_ends_with($host, '.' . $domainSuffix)) {
+        if (! str_ends_with($host, '.'.$domainSuffix)) {
             return $next($request);
         }
 
-        $tenantDomain = str_replace('.' . $domainSuffix, '', $host);
+        $tenantDomain = str_replace('.'.$domainSuffix, '', $host);
 
         // Check if tenant exists in database
         $tenant = Tenant::where('domain', $tenantDomain)->first();
 
-        if (!$tenant) {
+        if (! $tenant) {
             // For any path on non-existent tenant domain, show tenant-not-found
             return view('bossonboarding::tenant-not-found');
         }

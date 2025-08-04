@@ -4,13 +4,12 @@ namespace Base33\BossOnboarding\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UnifiedErrorHandler
 {
-            public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
         try {
             $response = $next($request);

@@ -36,7 +36,7 @@ class TenantRegistrationController extends Controller
 
         try {
             // Create tenant without using Filament
-            $tenant = new Tenant();
+            $tenant = new Tenant;
             $tenant->name = $data['tenant_name'];
             $tenant->domain = $data['tenant_domain'];
             $tenant->database = Str::slug($data['tenant_name']);
@@ -64,7 +64,7 @@ class TenantRegistrationController extends Controller
 
             return redirect()->route('register.success')->with('tenant', $tenant);
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => 'Errore durante la creazione del tenant: ' . $e->getMessage()])->withInput();
+            return redirect()->back()->withErrors(['error' => 'Errore durante la creazione del tenant: '.$e->getMessage()])->withInput();
         }
     }
 

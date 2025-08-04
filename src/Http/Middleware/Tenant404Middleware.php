@@ -16,7 +16,7 @@ class Tenant404Middleware
             $host = $request->getHost();
             $centralDomains = ['boss.ddev.site', 'bossnew.ddev.site'];
 
-            if (!in_array($host, $centralDomains)) {
+            if (! in_array($host, $centralDomains)) {
                 return response()->view('bossonboarding::tenant-404', [], 404);
             }
         }

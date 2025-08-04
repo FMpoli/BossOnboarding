@@ -6,8 +6,7 @@
  * This file contains helper functions for the BossOnboarding plugin.
  * These functions provide utility methods for common operations.
  */
-
-if (!function_exists('boss_onboarding')) {
+if (! function_exists('boss_onboarding')) {
     /**
      * Get the BossOnboarding plugin instance.
      *
@@ -19,12 +18,12 @@ if (!function_exists('boss_onboarding')) {
     }
 }
 
-if (!function_exists('boss_onboarding_config')) {
+if (! function_exists('boss_onboarding_config')) {
     /**
      * Get a configuration value for the BossOnboarding plugin.
      *
-     * @param string $key
-     * @param mixed $default
+     * @param  string  $key
+     * @param  mixed  $default
      * @return mixed
      */
     function boss_onboarding_config($key, $default = null)
@@ -33,13 +32,13 @@ if (!function_exists('boss_onboarding_config')) {
     }
 }
 
-if (!function_exists('boss_onboarding_route')) {
+if (! function_exists('boss_onboarding_route')) {
     /**
      * Generate a URL to a BossOnboarding route.
      *
-     * @param string $name
-     * @param array $parameters
-     * @param bool $absolute
+     * @param  string  $name
+     * @param  array  $parameters
+     * @param  bool  $absolute
      * @return string
      */
     function boss_onboarding_route($name, $parameters = [], $absolute = true)
@@ -48,12 +47,12 @@ if (!function_exists('boss_onboarding_route')) {
     }
 }
 
-if (!function_exists('boss_onboarding_view')) {
+if (! function_exists('boss_onboarding_view')) {
     /**
      * Get a BossOnboarding view.
      *
-     * @param string $view
-     * @param array $data
+     * @param  string  $view
+     * @param  array  $data
      * @return \Illuminate\View\View
      */
     function boss_onboarding_view($view, $data = [])
