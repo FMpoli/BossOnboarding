@@ -128,6 +128,33 @@
     @apply animate-pulse;
 }
 
+/* Filament Specific Components */
+.fi-fo-field-wrp {
+    @apply mb-4;
+}
+
+.fi-fo-field-label-ctn {
+    @apply mb-2;
+}
+
+.fi-fo-field-content-col {
+    @apply w-full;
+}
+
+.fi-input-wrp {
+    @apply relative;
+}
+
+.fi-input-wrp-content-ctn {
+    @apply relative;
+}
+
+/* Checkbox styling */
+.fi-checkbox {
+    @apply h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded 
+           dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-indigo-400;
+}
+
 /* Responsive adjustments */
 @media (max-width: 640px) {
     .fi-input {
