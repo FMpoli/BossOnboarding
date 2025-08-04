@@ -65,7 +65,9 @@ class RegisterTenant extends Component implements HasSchemas
             ])->statePath('data');
     }
 
-    public function create()
+
+
+        public function create()
     {
         logger('Create method called');
         $data = $this->form->getState();
