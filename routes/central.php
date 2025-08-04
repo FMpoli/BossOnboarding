@@ -14,20 +14,20 @@ Route::middleware('web')->group(function () {
         $domain = request()->get('domain');
         $domainSuffix = config('bossonboarding.default_domain_suffix', 'bossnew.ddev.site');
 
-        if (!$domain) {
+        if (! $domain) {
             return redirect('/')->with('error', 'Dominio tenant richiesto');
         }
 
         // Check if tenant exists
         $tenant = \App\Models\Tenant::where('domain', $domain)->first();
 
-        if (!$tenant) {
+        if (! $tenant) {
             // Redirect to tenant-not-found page with the attempted domain
             return redirect()->route('tenant.not.found', ['domain' => $domain]);
         }
 
         // Costruisci l'URL del tenant
-        $tenantUrl = 'https://' . $domain . '.' . $domainSuffix;
+        $tenantUrl = 'https://'.$domain.'.'.$domainSuffix;
 
         return redirect($tenantUrl);
     })->name('go.to.tenant');

@@ -2,9 +2,9 @@
 
 namespace Base33\BossOnboarding\Http\Middleware;
 
+use App\Models\Tenant;
 use Closure;
 use Illuminate\Http\Request;
-use App\Models\Tenant;
 
 class CentralAppMiddleware
 {
@@ -20,20 +20,20 @@ class CentralAppMiddleware
             if ($request->is('go-to-tenant')) {
                 $domain = $request->get('domain');
 
-                if (!$domain) {
+                if (! $domain) {
                     return redirect('/')->with('error', 'Dominio tenant richiesto');
                 }
 
                 // Check if tenant exists
                 $tenant = Tenant::where('domain', $domain)->first();
 
-                if (!$tenant) {
+                if (! $tenant) {
                     // Redirect to tenant-not-found page with the attempted domain
                     return redirect()->route('tenant.not.found', ['domain' => $domain]);
                 }
 
                 // Costruisci l'URL del tenant
-                $tenantUrl = 'https://' . $domain . '.' . $domainSuffix;
+                $tenantUrl = 'https://'.$domain.'.'.$domainSuffix;
 
                 return redirect($tenantUrl);
             }
@@ -44,19 +44,19 @@ class CentralAppMiddleware
             }
 
             // Route di fallback per la central app
-            if ($request->is('*') && !$request->is('admin/*') && !$request->is('register*') && !$request->is('go-to-tenant') && !$request->is('tenant-not-found')) {
+            if ($request->is('*') && ! $request->is('admin/*') && ! $request->is('register*') && ! $request->is('go-to-tenant') && ! $request->is('tenant-not-found')) {
                 return response('Pagina non trovata', 404);
             }
         } else {
             // Se siamo su un dominio tenant
             if ($request->is('/')) {
                 // Extract tenant domain from host
-                $tenantDomain = str_replace('.' . $domainSuffix, '', $host);
+                $tenantDomain = str_replace('.'.$domainSuffix, '', $host);
 
                 // Check if tenant exists in database
                 $tenant = Tenant::where('domain', $tenantDomain)->first();
 
-                if (!$tenant) {
+                if (! $tenant) {
                     return view('bossonboarding::tenant-not-found');
                 }
 

@@ -24,7 +24,7 @@ class TenantRequired
         // Check if tenant exists in database
         $tenant = \App\Models\Tenant::where('domain', $subdomain)->first();
 
-        if (!$tenant) {
+        if (! $tenant) {
             // Per le route /app/*, controlla se sono route di autenticazione
             if ($request->is('app/*')) {
                 // Se sono route di autenticazione di Filament, permette l'accesso
