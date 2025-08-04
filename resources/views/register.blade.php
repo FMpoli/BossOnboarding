@@ -55,26 +55,21 @@
 @section('auth-links')
     <div class="space-y-4 text-center">
         <p class="text-sm text-gray-600 dark:text-gray-400">
-            Hai già un account?
-            <a href="{{ route('login') }}" class="font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300">
-                Accedi qui
+            Hai già un tenant?
+            <a href="{{ url('/') }}" class="font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300">
+                Torna alla home
             </a>
         </p>
 
         <div class="space-y-1 text-xs text-gray-500 dark:text-gray-400">
             <p>
-                <a href="{{ route('password.request') }}" class="hover:text-gray-700 dark:hover:text-gray-300">
-                    Password dimenticata
+                <a href="#" class="hover:text-gray-700 dark:hover:text-gray-300">
+                    Hai bisogno di aiuto?
                 </a>
             </p>
             <p>
                 <a href="#" class="hover:text-gray-700 dark:hover:text-gray-300">
-                    Reinvia email di verifica
-                </a>
-            </p>
-            <p>
-                <a href="#" class="hover:text-gray-700 dark:hover:text-gray-300">
-                    Non riesci ad accedere? Clicca qui
+                    Contatta il supporto
                 </a>
             </p>
         </div>

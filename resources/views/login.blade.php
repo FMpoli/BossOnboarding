@@ -63,11 +63,11 @@
                     Ricordami
                 </label>
             </div>
-            <div class="text-sm">
-                <a href="{{ route('password.request') }}" class="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300">
-                    Password dimenticata?
-                </a>
-            </div>
+                    <div class="text-sm">
+            <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300">
+                Password dimenticata?
+            </a>
+        </div>
         </div>
 
         <!-- Submit Button -->
@@ -114,26 +114,21 @@
 @section('auth-links')
     <div class="text-center space-y-4">
         <p class="text-sm text-gray-600 dark:text-gray-400">
-            Non hai un account?
+            Non hai un tenant?
             <a href="{{ route('register.tenant') }}" class="font-semibold text-pink-600 hover:text-pink-500 dark:text-pink-400 dark:hover:text-pink-300">
-                Crea un account
+                Crea un tenant
             </a>
         </p>
 
         <div class="text-xs text-gray-500 dark:text-gray-400 space-y-1">
             <p>
-                <a href="{{ route('password.request') }}" class="hover:text-gray-700 dark:hover:text-gray-300">
-                    Password dimenticata
+                <a href="#" class="hover:text-gray-700 dark:hover:text-gray-300">
+                    Hai bisogno di aiuto?
                 </a>
             </p>
             <p>
                 <a href="#" class="hover:text-gray-700 dark:hover:text-gray-300">
-                    Reinvia email di verifica
-                </a>
-            </p>
-            <p>
-                <a href="#" class="hover:text-gray-700 dark:hover:text-gray-300">
-                    Non riesci ad accedere? Clicca qui
+                    Contatta il supporto
                 </a>
             </p>
         </div>
