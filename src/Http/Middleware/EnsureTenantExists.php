@@ -2,9 +2,9 @@
 
 namespace Base33\BossOnboarding\Http\Middleware;
 
+use App\Models\Tenant;
 use Closure;
 use Illuminate\Http\Request;
-use App\Models\Tenant;
 
 class EnsureTenantExists
 {
@@ -19,12 +19,12 @@ class EnsureTenantExists
             return $next($request);
         }
 
-        $tenantDomain = str_replace('.' . $domainSuffix, '', $host);
+        $tenantDomain = str_replace('.'.$domainSuffix, '', $host);
 
         // Check if tenant exists in database
         $tenant = Tenant::where('domain', $tenantDomain)->first();
 
-        if (!$tenant) {
+        if (! $tenant) {
             return view('bossonboarding::tenant-not-found');
         }
 
