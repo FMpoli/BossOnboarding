@@ -62,7 +62,8 @@ class TenantRegistrationController extends Controller
                 ]);
             });
 
-            \Log::info('Tenant ID before redirect: ' . $tenant->id);
+            \Log::info('Tenant ID before redirect: '.$tenant->id);
+
             return redirect()->route('register.success')->with('tenant_id', $tenant->id);
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => 'Errore durante la creazione del tenant: '.$e->getMessage()])->withInput();
