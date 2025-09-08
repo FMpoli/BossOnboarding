@@ -52,7 +52,7 @@
 
                 @php
                     $host = request()->getHost();
-                    $centralDomains = config('app.central_domains');
+                    $centralDomains = explode(',', config('app.central_domains'));
                     $isCentralDomain = in_array($host, $centralDomains);
                     $isLoggedIn = auth()->check();
                 @endphp

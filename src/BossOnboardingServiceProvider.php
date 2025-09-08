@@ -46,9 +46,9 @@ class BossOnboardingServiceProvider extends PackageServiceProvider
         $this->app['router']->pushMiddlewareToGroup('web', UnifiedErrorHandler::class);
 
         // Register custom exception handler
-        $this->app->singleton(
-            \Illuminate\Contracts\Debug\ExceptionHandler::class,
-            Handler::class
-        );
+        // $this->app->singleton(
+        //     \Illuminate\Contracts\Debug\ExceptionHandler::class,
+        //     Handler::class
+        // );
     }
 }
