@@ -11,7 +11,7 @@ class TenantRequired
     {
         // Check if we're on a tenant domain
         $host = $request->getHost();
-        $centralDomains = ['boss.ddev.site', 'bossnew.ddev.site'];
+        $centralDomains = config('app.central_domains');
 
         // If we're on a central domain, allow the request
         if (in_array($host, $centralDomains)) {

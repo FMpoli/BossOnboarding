@@ -11,8 +11,8 @@ class CentralAppMiddleware
     public function handle(Request $request, Closure $next)
     {
         $host = $request->getHost();
-        $centralDomains = config('bossonboarding.central_domains', ['boss.ddev.site', 'bossnew.ddev.site']);
-        $domainSuffix = config('bossonboarding.default_domain_suffix', 'bossnew.ddev.site');
+        $centralDomains = config('app.central_domains');
+        $domainSuffix = config('bossonboarding.default_domain_suffix');
 
         // Se siamo su un dominio centrale
         if (in_array($host, $centralDomains)) {

@@ -52,7 +52,7 @@
 
                 @php
                     $host = request()->getHost();
-                    $centralDomains = config('bossonboarding.central_domains', ['boss.ddev.site', 'bossnew.ddev.site']);
+                    $centralDomains = config('app.central_domains');
                     $isCentralDomain = in_array($host, $centralDomains);
                     $isLoggedIn = auth()->check();
                 @endphp

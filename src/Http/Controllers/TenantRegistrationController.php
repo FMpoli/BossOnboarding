@@ -62,7 +62,8 @@ class TenantRegistrationController extends Controller
                 ]);
             });
 
-            return redirect()->route('register.success')->with('tenant', $tenant);
+            \Log::info('Tenant ID before redirect: ' . $tenant->id);
+            return redirect()->route('register.success')->with('tenant_id', $tenant->id);
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => 'Errore durante la creazione del tenant: '.$e->getMessage()])->withInput();
         }
@@ -70,12 +71,12 @@ class TenantRegistrationController extends Controller
 
     public function success()
     {
-        // Debug: check if tenant data is in session
-        $tenant = session('tenant');
+        $tenant_id = session('tenant_id');
+        $tenant = $tenant_id ? \App\Models\Tenant::find($tenant_id) : null;
 
         if (! $tenant) {
             // If no tenant in session, redirect back to registration
-            return redirect()->route('register.tenant')->with('error', 'Nessun tenant trovato nella sessione');
+            return redirect()->route('register.tenant')->with('error', 'ID tenant non trovato nella sessione');
         }
 
         return view('bossonboarding::register-tenant-success', compact('tenant'));

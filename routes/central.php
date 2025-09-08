@@ -4,6 +4,11 @@ use Base33\BossOnboarding\Http\Controllers\TenantRegistrationController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('web')->group(function () {
+    // Main landing page (replaces welcome.blade.php)
+    Route::get('/', function () {
+        return view('bossonboarding::welcome');
+    })->name('welcome');
+
     // Tenant Registration Routes (only for central app)
     Route::get('/register', [TenantRegistrationController::class, 'create'])->name('register.tenant');
     Route::post('/register-tenant', [TenantRegistrationController::class, 'store'])->name('tenant.register.store');

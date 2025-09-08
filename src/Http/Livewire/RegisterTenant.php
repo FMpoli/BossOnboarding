@@ -115,7 +115,7 @@ class RegisterTenant extends Component implements HasSchemas
             $this->form->fill();
 
             // Salva il tenant nella sessione e reindirizza alla pagina di successo
-            session(['tenant' => $tenant]);
+            session(['tenant_id' => $tenant->id]);
             logger('Onboarding completato!');
 
             return redirect()->route('register.success');

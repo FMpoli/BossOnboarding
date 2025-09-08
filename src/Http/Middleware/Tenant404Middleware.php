@@ -14,7 +14,7 @@ class Tenant404Middleware
         // Se la risposta è un 404 e siamo su un dominio tenant
         if ($response->getStatusCode() === 404) {
             $host = $request->getHost();
-            $centralDomains = ['boss.ddev.site', 'bossnew.ddev.site'];
+            $centralDomains = config('app.central_domains');
 
             if (! in_array($host, $centralDomains)) {
                 return response()->view('bossonboarding::tenant-404', [], 404);

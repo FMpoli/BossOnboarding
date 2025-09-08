@@ -5,10 +5,14 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('web')->group(function () {
     Route::get('/', function () {
         $host = request()->getHost();
-        $domainSuffix = config('bossonboarding.default_domain_suffix', 'bossnew.ddev.site');
+        \Log::info('Tenant Route: Host = ' . $host);
+
+        $domainSuffix = config('bossonboarding.default_domain_suffix');
+        \Log::info('Tenant Route: Domain Suffix = ' . $domainSuffix);
 
         // Extract tenant domain from host
         $tenantDomain = str_replace('.'.$domainSuffix, '', $host);
+        \Log::info('Tenant Route: Tenant Domain = ' . $tenantDomain);
 
         // Handle case where host is exactly the domain suffix (central domain)
         if ($host === $domainSuffix) {
@@ -17,6 +21,7 @@ Route::middleware('web')->group(function () {
 
         // Check if tenant exists in database
         $tenant = \App\Models\Tenant::where('domain', $tenantDomain)->first();
+        \Log::info('Tenant Route: Tenant found = ' . ($tenant ? 'true' : 'false'));
 
         if (! $tenant) {
             return view('bossonboarding::tenant-not-found');
