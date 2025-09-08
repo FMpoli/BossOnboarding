@@ -10,5 +10,5 @@ return [
     |
     */
 
-    'default_domain_suffix' => env('BOSS_DOMAIN_SUFFIX', env('APP_DOMAIN')),
+    'default_domain_suffix' => env('APP_DOMAIN'),
 ];
